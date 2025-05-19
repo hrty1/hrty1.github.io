@@ -11,13 +11,41 @@
 <!-- Any requirejs-compatible loader (https://requirejs.org/) will work. -->
 <script type="text/javascript" src="https://copy-cat.squiddev.cc/require.js"></script>
 
-<script>
-  // Tell requirejs to load copycat/* from the website.
-  require.config({ paths: { copycat: "https://copy-cat.squiddev.cc/" } });
-  // Find our #embed-computer element and inject a computer terminal into it.
-  require(["copycat/embed"], setup => setup(document.getElementById("embed-computer"), {
-  peripherals: { back: "speaker" },
-})));
-</script>
+
+    <script>
+      require.config({ paths: { copycat: "https://copy-cat.squiddev.cc/" } });
+      require(["copycat/embed"], setup => {
+        // Basic example
+        
+
+        // More complete example.
+        const computer = setup(document.getElementById("embed-computer"), {
+          // Specify a computer id to persist files. This does not determine the computer ID - that is always 0.
+          persistId: 0,
+
+          // Either true/false, or a path to a custom font file.
+         
+          // A map of files to their contents. The values may be ArrayBuffers,
+          // ArrayBuffer views (such as UInt8Array) or plain strings.
+          files: {
+            "startup.lua": "print('Running startup.lua.') print(os.pullEvent('from_js'))\n",
+            "nested/file.txt": "A file in a sub-directory",
+          },
+
+          // Specify the terminals's dimensions.
+          
+
+          // Provide a custom label
+          
+
+          // Specify peripherals, as a map of side (front, back, left, right, top, bottom) to peripheral
+          // type. Currently only "speaker" is supported.
+          peripherals: {back: "speaker"},
+        });
+
+        // See /src/web/ts/computer/access.ts for available methods.
+        setTimeout(async () => (await computer).queueEvent("from_js", ["Got event from JS"]), 5000);
+      });
+    </script>
   </body>
 </html>
