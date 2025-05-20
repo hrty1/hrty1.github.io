@@ -117,25 +117,7 @@
           files: {
             "startup.lua": "print('Running startup.lua.') print(os.pullEvent('from_js'))\n",
             "nested/file.txt": "A file in a sub-directory",
-            "alarm.lua": "local dfpwm = require("cc.audio.dfpwm")
-local speaker = peripheral.find("speaker")
-local decoder = dfpwm.make_decoder()
-if true then
-    if redstone.getInput("back") then
-        
-
-
-
-     for chunk in io.lines("alarm.dfpwm", 16 * 1024) do
-     local buffer = decoder(chunk)
-
-      while not speaker.playAudio(buffer) do
-        os.pullEvent("speaker_audio_empty")
-      end 
-       
-    end
-end
-end",
+            
           },
 
           // Specify the terminals's dimensions.
